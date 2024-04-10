@@ -1,10 +1,20 @@
-# Model Driven Architecture
+# Entity Driven Architecture
+
+Entity Driven Architecture - it's a way to make your project simple and extendable.
+
+## Core Rules
+
+- As simple as possible (KISS).
+- Correct Naming.
+- No nested lists.
 
 ## File structure
 
 ```text
-common // Common components are typically software or technical systems created once and reused many times.
-pages // Page components are components to represent pages.
+core // First-level interfaces, classes, services (SOLID)
+entities // Interfaces for models, services - for communication between API and components
+components // Components that can be reused (DRY).
+pages // Components for pages (contains components).
 ```
 
 ```text
