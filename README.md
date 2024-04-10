@@ -7,6 +7,7 @@ Entity Driven Architecture - it's a way to make your project simple and extendab
 - As simple as possible (KISS).
 - Correct Naming.
 - No nested lists.
+- Component-based style.
 
 ## File structure
 
@@ -17,36 +18,43 @@ components // Components that can be reused (DRY).
 pages // Components for pages (contains components).
 ```
 
+### Example
+
 ```text
-common/
-  header/
-    header.component.js
-    header.component.spec.js
-    header.css
-    header.service.js
-    header.service.spec.js
-    header.mockup.js
-    header.constants.js
+core/
+  local-storage/
+    local-storage.service.ts
+    local-storage.service.spec.ts
+entities/
   user/
-    user.service.js
-    user.service.spec.js
-    user.mockup.js
-    user.constants.js
+    user.service.ts
+    user.service.spec.ts
+    user.mockup.ts
+    user.constant.ts
+components/
+  header/
+    header.component.ts
+    header.component.spec.ts
+    header.css
+    header.service.ts
+    header.service.spec.jts
+    header.mockup.ts
+    header.constant.ts
 pages/
   home/
-    home.component.js
-    home.component.spec.js
+    home.component.ts
+    home.component.spec.ts
     home.css
-    home.service.js
-    home.service.spec.js
-    home.mockup.js
-    home.constants.js
+    home.service.ts
+    home.service.spec.ts
+    home.mockup.ts
+    home.constant.ts
   users/
-    users.component.js
-    users.component.spec.js
+    users.component.ts
+    users.component.spec.ts
     users.css
-    users.service.js
-    users.service.spec.js
-    users.mockup.js
-    users.constants.js
+    users.service.ts
+    users.service.spec.ts
+    users.mockup.ts
+    users.constant.ts
 ```
