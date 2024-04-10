@@ -27,6 +27,7 @@ core/
     local-storage.service.spec.ts
 entities/
   user/
+    user.interface.ts
     user.service.ts
     user.service.spec.ts
     user.mockup.ts
