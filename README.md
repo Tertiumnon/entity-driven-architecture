@@ -54,8 +54,8 @@ entities/
 
 ```text
 core          -> First-level interfaces, classes, services (SOLID)
-entities      -> Interfaces for models, services - for communication between API and components
 components    -> Components that can be reused (DRY).
+entities      -> Interfaces for models, services - for communication between API and components
 pages         -> Components for pages (contains components).
 ```
 
@@ -66,13 +66,6 @@ core/
   local-storage/
     local-storage.service.ts
     local-storage.service.spec.ts
-entities/
-  user/
-    user.interface.ts
-    user.service.ts
-    user.service.spec.ts
-    user.mockup.ts
-    user.constant.ts
 components/
   navbar/
     navbar.component.ts
@@ -90,6 +83,13 @@ components/
     header.service.spec.jts
     header.mockup.ts
     header.constant.ts
+entities/
+  user/
+    user.interface.ts
+    user.service.ts
+    user.service.spec.ts
+    user.mockup.ts
+    user.constant.ts
 pages/
   home/                       -> "/"
     home.component.ts
