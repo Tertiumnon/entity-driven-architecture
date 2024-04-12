@@ -11,23 +11,30 @@ Entity Driven Architecture - it's a way to make your project simple and extendab
 
 ### No nested folders/components/etc
 
-You should use only 3 levels.
+You should use 3 levels.
 
 ```text
+# BAD
+entities/              -> 1st level
+  user.interface.ts    -> 2nd level
+```
+
+```text
+# GOOD
 entities/              -> 1st level
   user/                -> 2nd level
     user.interface.ts  -> 3rd level
 ```
 
-The same for URL's.
+The same for URL's, but as less as possible.
 
 ```text
+# GOOD
 /users                       -> 1st level
 /users/{{id}}                -> 2nd level
 /profile/settings            -> 2nd level
 /profile/email/confirmation  -> 3rd level
 ```
-
 
 ### Component-based style
 
