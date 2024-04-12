@@ -6,8 +6,32 @@ Entity Driven Architecture - it's a way to make your project simple and extendab
 
 - As simple as possible (KISS).
 - Correct Naming.
-- No nested lists.
+- No nested components.
 - Component-based style.
+
+### No nested folders/components/etc
+
+You should use only 2 levels.
+
+```text
+entities/  -> 1st level
+  user/    -> 2nd level
+    user.interface.ts
+```
+
+### Component-based style
+
+You should place all entity-files into one directory, including tests. So you can divide your application into parts that can be moved or deleted without problems.
+
+```text
+entities/  -> 1st level
+  user/    -> 2nd level
+    user.interface.ts
+    user.service.ts
+    user.service.spec.ts
+    user.mockup.ts
+    user.constant.ts
+```
 
 ## File structure
 
