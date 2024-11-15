@@ -4,10 +4,19 @@ Entity Driven Architecture - it's a way to make your project simple and extendab
 
 ## Core Rules
 
-- As simple as possible (KISS).
-- Correct Naming.
-- No nested components.
-- Component-based style.
+First of all it's very important to use KISS, SOLID and Clean Architecture principles.
+
+And then you need to understand what is Entity.
+
+### Entity
+
+Entity is a base unit that exists as a model. 
+
+## Other rules
+
+- No nested components
+- Correct Naming
+- Component-based style
 
 ### No nested folders/components/etc
 
@@ -53,10 +62,10 @@ entities/
 ## File structure
 
 ```text
-core          -> First-level interfaces, classes, services (SOLID)
-components    -> Components that can be reused (DRY).
-entities      -> Interfaces for models, services - for communication between API and components
-pages         -> Components for pages (contains components).
+core          -> First-level (abstract) classes and interfaces (SOLID)
+components    -> Components that can be reused (DRY)
+entities      -> Classes and interfaces for entities
+pages         -> Components for views
 ```
 
 ### Example
