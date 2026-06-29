@@ -1,50 +1,73 @@
-# entity-driven-architecture
+# Blog Platform - Entity-Driven Architecture
 
-> **Working code examples demonstrating entity-driven development principles using HTML/CSS/TypeScript.**
+> **Real-world blog platform demonstrating entity-driven architecture with Bun + Elysia backend and SolidJS frontend.**
 
-This repository contains **real, runnable implementations** of entity-driven architecture patterns. Each example shows how to structure applications around clear domain entities.
+A complete, working implementation of entity-driven development principles. Users create and manage articles, readers browse and comment.
 
-**Theory + Practice**: This repo is the practical complement to [know-your-entity](https://github.com/Tertium/know-your-entity) documentation.
+**Tech Stack**:
+- Backend: Bun + Elysia (TypeScript server)
+- Frontend: SolidJS + Vite (reactive UI)
+- Structure: Monorepo with Bun workspaces
 
 ---
 
 ## Quick Start
 
-### 1. Set Up
+### Prerequisites
+- Bun (https://bun.sh)
+- Node.js (for frontend tooling compatibility)
+
+### 1. Install Dependencies
 
 ```bash
-npm install
-npm run dev
+bun install
 ```
 
-Opens development server at `http://localhost:3000`
+### 2. Start Development Servers
 
-### 2. Choose an Example
+```bash
+# Terminal 1: Backend (runs on :3001)
+bun backend:dev
 
-- **01-basic-structure** - Minimal example to understand the pattern
-- **02-e-commerce** - Full e-commerce app with Users, Products, Orders
-- **03-blog-platform** - Blog with Posts, Comments, Tags
-- **04-task-management** - Task manager with Projects, Tasks, Labels
+# Terminal 2: Frontend (runs on :3000)
+bun frontend:dev
+```
 
 ### 3. Explore the Code
 
+**Backend** (`packages/backend/src/`)
 ```
-examples/02-e-commerce/src/
-├── core/              ← Shared services (HTTP, LocalStorage)
-├── entities/          ← Business logic (User, Product, Order)
-├── components/        ← Reusable UI (ProductCard, CartItem)
-└── pages/             ← Full pages (Products, Checkout)
+├── core/              ← Shared utilities (database, middleware, config)
+├── entities/          ← Business logic (user, article, comment, tag)
+│   └── user/
+│       ├── user.types.ts       ← Interfaces and types
+│       ├── user.constants.ts   ← Constants
+│       ├── user.mock.ts        ← Mock data
+│       ├── user.service.ts     ← Business logic
+│       ├── user.repository.ts  ← Database access
+│       └── user.test.ts        ← Tests
+├── routes/            ← API endpoints (auth, users, articles, comments)
+└── app.ts             ← Elysia app configuration
+```
+
+**Frontend** (`packages/frontend/src/`)
+```
+├── core/              ← Shared utilities (HTTP, state, router)
+├── entities/          ← Business logic mirroring backend
+├── components/        ← Reusable UI components
+├── pages/             ← Full-page components
+└── App.tsx            ← Root component
 ```
 
 ---
 
-## Learn the Theory First
+## Learn Entity-Driven Development
 
-**New to entity-driven development?** Start here:
+**New to entity-driven development?**
 
-1. **[What is an Entity?](https://github.com/Tertium/know-your-entity/blob/main/docs/01-introduction/what-is-entity.md)** — 5 min, foundational concept
-2. **[5-Minute Quick Start](https://github.com/Tertium/know-your-entity/blob/main/docs/01-introduction/quick-start.md)** — Essential rules at a glance
-3. **Then see code examples** — How theory works in practice (this repo)
+1. **[Know Your Entity](https://github.com/Tertium/know-your-entity)** — Complete documentation
+2. **[What is an Entity?](https://github.com/Tertium/know-your-entity/blob/main/docs/01-introduction/what-is-entity.md)** — Foundational concepts
+3. **This codebase** — Practical working examples
 
 ---
 

@@ -1,0 +1,13 @@
+[build]
+root = "src"
+outdir = "dist"
+target = "bun"
+
+[test]
+timeout = 5000
+root = "src"
+
+[bundle]
+root = "src"
+main = "src/index.ts"
+outdir = "dist"

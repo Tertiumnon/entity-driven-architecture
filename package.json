@@ -1,38 +1,36 @@
 {
-  "name": "entity-driven-architecture",
+  "name": "blog-platform",
   "version": "1.0.0",
-  "description": "Working examples of entity-driven architecture principles using HTML/CSS/TypeScript",
+  "description": "Real-world blog platform demonstrating entity-driven architecture with Bun + Elysia backend and SolidJS frontend",
   "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/backend",
+    "packages/frontend",
+    "packages/shared"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage",
-    "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "eslint src --ext .ts,.tsx --fix",
-    "type-check": "tsc --noEmit"
+    "backend:dev": "bun --cwd packages/backend dev",
+    "backend:build": "bun --cwd packages/backend build",
+    "backend:test": "bun --cwd packages/backend test",
+    "frontend:dev": "bun --cwd packages/frontend dev",
+    "frontend:build": "bun --cwd packages/frontend build",
+    "frontend:test": "bun --cwd packages/frontend test"
   },
   "keywords": [
     "entity-driven",
     "architecture",
     "typescript",
-    "examples",
-    "clean-code"
+    "bun",
+    "elysia",
+    "solidjs",
+    "blog-platform"
   ],
   "author": "Tertium Development Team",
   "license": "UNLICENSED",
   "devDependencies": {
+    "@types/bun": "latest",
     "@types/node": "^20.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-basic-ssl": "^1.0.0",
-    "@vitest/coverage-v8": "^1.0.0",
-    "@vitest/ui": "^1.0.0",
-    "eslint": "^8.50.0",
-    "typescript": "^5.2.0",
-    "vite": "^5.0.0",
-    "vitest": "^1.0.0"
+    "typescript": "^5.2.0"
   }
 }
