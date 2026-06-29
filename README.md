@@ -1,311 +1,247 @@
-# Entity Driven Architecture
+# entity-driven-architecture
 
-Entity Driven Architecture - it's a way to make your project simple and extendable.
+> **Working code examples demonstrating entity-driven development principles using HTML/CSS/TypeScript.**
 
-## Core Rules
+This repository contains **real, runnable implementations** of entity-driven architecture patterns. Each example shows how to structure applications around clear domain entities.
 
-First of all it's very important to use KISS, SOLID and Clean Architecture principles.
+**Theory + Practice**: This repo is the practical complement to [know-your-entity](https://github.com/Tertium/know-your-entity) documentation.
 
-And then you need to understand what is Entity.
+---
 
-### Entity
+## Quick Start
 
-Entity is a base unit that exists as a model. 
+### 1. Set Up
 
-Сущность (entity) - это объект (структура данных), имеющий характеризующие его свойства.
-
-Понимание сущности даёт нам понимание процессов и того, как написать наиболее простой и понятный код.
-
-Например, мы можем сказать, что есть сущность `User`, имеющая свойства `email` и `name`.
-
-```ts
-User
-  email
-  name
+```bash
+npm install
+npm run dev
 ```
 
-User, Post, Comment и другие - это всё базовые сущности, "кирпичики", из которых состоит система.
+Opens development server at `http://localhost:3000`
 
-По сути, сущность - это базовое понятие ООП - абстракция данных, которая нужна для того, чтобы мы могли лучше понять, как работать с имеющимся набором данных.
+### 2. Choose an Example
 
-Сущность - это также Модель данных, которая может/должна соответствовать таблице в базе данных.
+- **01-basic-structure** - Minimal example to understand the pattern
+- **02-e-commerce** - Full e-commerce app with Users, Products, Orders
+- **03-blog-platform** - Blog with Posts, Comments, Tags
+- **04-task-management** - Task manager with Projects, Tasks, Labels
 
-Например, в случае с User - это должна быть таблица в БД на стороне сервера. Однако, есть и другие кейсы. Например, сущность LocalStorage для браузера - это тоже сущность, но она не будет иметь своей таблицы в БД на сервере.
+### 3. Explore the Code
 
-```ts
-class LocalStorageService {
-  setItem() {}
-  getItem() {}
-}
+```
+examples/02-e-commerce/src/
+├── core/              ← Shared services (HTTP, LocalStorage)
+├── entities/          ← Business logic (User, Product, Order)
+├── components/        ← Reusable UI (ProductCard, CartItem)
+└── pages/             ← Full pages (Products, Checkout)
 ```
 
-## Other rules
+---
 
-- No nested components
-- Correct Naming
-- Component-based style
+## Learn the Theory First
 
-### No nested folders/components/etc
+**New to entity-driven development?** Start here:
 
-You should use 3 levels.
+1. **[What is an Entity?](https://github.com/Tertium/know-your-entity/blob/main/docs/01-introduction/what-is-entity.md)** — 5 min, foundational concept
+2. **[5-Minute Quick Start](https://github.com/Tertium/know-your-entity/blob/main/docs/01-introduction/quick-start.md)** — Essential rules at a glance
+3. **Then see code examples** — How theory works in practice (this repo)
 
-```text
-# BAD
-entities/              -> 1st level
-  user.interface.ts    -> 2nd level
+---
+
+## Examples
+
+### 01. Basic Structure
+
+**What you'll learn**: Foundation of entity-driven architecture
+
+**Demonstrates:**
+- Basic entity definition (User interface)
+- Service with CRUD operations (UserService)
+- Component using entity (UserCard)
+- Page that combines components (Users)
+- Unit tests for service
+- Mock data setup
+
+**Related theory:**
+- [What is an Entity?](https://github.com/Tertium/know-your-entity/blob/main/docs/01-introduction/what-is-entity.md)
+- [Service Layer Pattern](https://github.com/Tertium/know-your-entity/blob/main/docs/04-backend-patterns/service-layer.md)
+
+---
+
+### 02. E-Commerce
+
+**What you'll learn**: Real-world application with multiple entities, relationships, and complex logic
+
+**Demonstrates:**
+- Multiple entities (User, Product, Order, Cart)
+- Entity relationships (Order has UserID, ProductID)
+- DTOs separate from domain models
+- Complex service operations
+- Component composition and reusability
+- State management across pages
+- Error handling and validation
+- Full CRUD for each entity
+
+**Related theory:**
+- [Flat Entities](https://github.com/Tertium/know-your-entity/blob/main/docs/03-entity-structure/flat-entities.md)
+- [DTO vs Domain Model](https://github.com/Tertium/know-your-entity/blob/main/docs/03-entity-structure/dto-vs-domain.md)
+- [Folder Structure](https://github.com/Tertium/know-your-entity/blob/main/docs/06-architecture/folder-structure.md)
+
+---
+
+### 03. Blog Platform
+
+**What you'll learn**: Content management with complex relationships
+
+**Entities:**
+- User (author)
+- Post (article)
+- Comment (discussion)
+- Tag (categorization)
+
+**Related theory:**
+- [Relationships & References](https://github.com/Tertium/know-your-entity/blob/main/docs/03-entity-structure/relationships.md)
+
+---
+
+### 04. Task Management
+
+**What you'll learn**: Hierarchical entities with complex status workflows
+
+**Entities:**
+- Workspace (container)
+- User (team member)
+- Project (organization)
+- Task (unit of work)
+- Label (categorization)
+
+---
+
+## Key Architectural Patterns
+
+### Folder Structure (4 Levels)
+
+```
+src/
+├── core/          ← Level 1: Shared utilities
+│   ├── http/
+│   ├── router/
+│   └── storage/
+│
+├── entities/      ← Level 2: Business logic
+│   ├── user/
+│   ├── product/
+│   └── order/
+│
+├── components/    ← Level 3: Reusable UI
+│   ├── user-card/
+│   └── product-list/
+│
+└── pages/         ← Level 4: Full pages
+    ├── products/
+    └── checkout/
 ```
 
-```text
-# GOOD
-entities/              -> 1st level
-  user/                -> 2nd level
-    user.interface.ts  -> 3rd level
+**Max 3 folder levels** — Prevents deep nesting and complexity
+
+### Entity Collocation
+
+All related files in one folder:
+
+```
+entities/user/
+├── user.interface.ts      ← Entity definition
+├── user.dto.ts            ← Transfer objects
+├── user.service.ts        ← Business logic
+├── user.service.spec.ts   ← Tests
+├── user.mockup.ts         ← Test data
+└── user.constant.ts       ← Constants
 ```
 
-The same for URL's, but as less as possible.
+### Service Pattern
 
-```text
-# GOOD
-/users                       -> 1st level
-/users/{{id}}                -> 2nd level
-/profile/settings            -> 2nd level
-/profile/email/confirmation  -> 3rd level
-```
+Every entity has a service with standard operations:
 
-### Component-based style
-
-You should place all entity-files into one directory, including tests. So you can divide your application into parts that can be moved or deleted without problems.
-
-```text
-entities/
-  user/
-    user.interface.ts
-    user.service.ts
-    user.service.spec.ts
-    user.mockup.ts
-    user.constant.ts
-```
-
-## File structure
-
-```text
-core          -> First-level (abstract) classes and interfaces (SOLID)
-components    -> Components that can be reused (DRY)
-entities      -> Classes and interfaces for entities
-pages         -> Components for views
-```
-
-### Example
-
-```text
-core/
-  local-storage/
-    local-storage.service.ts
-    local-storage.service.spec.ts
-components/
-  navbar/
-    navbar.component.ts
-    navbar.component.spec.ts
-    navbar.css
-    navbar.service.ts
-    navbar.service.spec.jts
-    navbar.mockup.ts
-    navbar.constant.ts
-  header/
-    header.component.ts
-    header.component.spec.ts
-    header.css
-    header.service.ts
-    header.service.spec.jts
-    header.mockup.ts
-    header.constant.ts
-entities/
-  user/
-    user.interface.ts
-    user.service.ts
-    user.service.spec.ts
-    user.mockup.ts
-    user.constant.ts
-pages/
-  home/                       -> "/"
-    home.component.ts
-    home.component.spec.ts
-    home.css
-    home.service.ts
-    home.service.spec.ts
-    home.mockup.ts
-    home.constant.ts
-  users/                       -> "/users"
-    users.component.ts
-    users.component.spec.ts
-    users.css
-    users.service.ts
-    users.service.spec.ts
-    users.mockup.ts
-    users.constant.ts
-  user/                        -> "/users/{{id}}"
-    user.component.ts
-    user.component.spec.ts
-    user.css
-    user.service.ts
-    user.service.spec.ts
-    user.mockup.ts
-    user.constant.ts
-```
-
-## "Find"-methods
-
-If we can't find something and return type is a primitive, we should return the same type primitive.
-
-For example, basic JS methods:
-
-```ts
-"car".search("a"); // 1
-"car".search("c"); // 0
-"car".search("d"); // -1
-```
-
-Or may be:
-
-```ts
-function getUserLastName(user: User): string {}
-```
-
-If we can't find something and return type is an object, we should return `null`.
-
-```ts
-function findUser(filters: Filter[]): User | null {}
-```
-
-If you work with JS, you can use `undefined` value. But when you're getting data from API, you can't get `undefined`. So, you will get `null` value. That's the reason, why I think that `null` value is more preferable.
-
-```ts
-function findUser(filters: Filter[]): User | null {}
-```
-
-And the last case is an array. If you can't find, you will get an empty array.
-
-```ts
-function findUsers(filters: Filter[]): User[] {}
-```
-
-### If you want to return an array of entities
-
-```ts
-function getUsers(filters: Filter[]): User[] {}
-```
-
-### Throwing errors in methods
-
-How do you think, are these methods correct?
-
-```ts
-// if we know that the first ID is 0
-function getUserIdByName(name: string): number {
-  return userList.find(user => user.name === name)?.id || -1;
-}
-
-function getUserNameById(id: number): string {
-  return userList.find(user => user.id === id)?.name || "";
-}
-```
-
-Let's create more correct methods!
-
-```ts
-function findUserIdByName(name: string): number {
-  const user = userList.find(user => user.name === name);
-  if (!user) throw new Error(`User with name ${name} was not found.`);
-  return user.id;
-}
-
-function findUserNameById(id: number): string {
-  const user = userList.find(user => user.id === id);
-  if (!user) throw new Error(`User with id ${id} was not found.`);
-  return user.name;
-}
-```
-
-Is that right? I don't think so.
-
-## Method as a part of class
-
-Если метод является частью класса, то в целях сокращения лучше сократить названия методов, исходя из того, что нам уже известна сущность и нам не нужно повторяться.
-
-```ts
+```typescript
 class UserService {
-  find(): User[] {}
+  async find(filters?: Filter[]): Promise<User[]>
+  async get(id: number): Promise<User>
+  async create(dto: UserCreateDto): Promise<User>
+  async update(id: number, dto: UserUpdateDto): Promise<User>
+  async delete(id: number): Promise<boolean>
 }
 ```
 
-## API classes and methods
+### Flat Entities
 
-### Typical CRUD service
+Domain models have no nested objects:
 
-```ts
-// GOOD
-class UserService {
-  find(filters: Filter[]): User[] {} // find all users (using parameters/filters or without them)
-  create(dto: UserCreateDto): User {} // create user
-  get(id: string): User {} // get user by ID or GUID
-  update(id: string, dto: UserUpdateDto): User {} // update user
-  delete(id: string): boolean {} // delete user
+```typescript
+// ✅ GOOD: Flat domain model
+interface User {
+  id: number;
+  age: number;
+  bio: string;
 }
 
-// NOT SO GOOD
-class UserService {
-  findAll(filters: Filter[]): User[] {} // find all users (using parameters/filters or without them)
-  findUnique(filters: Filter[]): User {} // find unique user (using parameters/filters)
-  create(dto: UserCreateDto): User {} // create user
-  get(id: string): User {} // get user by ID or GUID
-  update(id: string, dto: UserUpdateDto): User {} // update user
-  delete(id: string): boolean {} // delete user
-}
-
-// BAD, because it's complicated
-class UserService {
-  findAll(filters: Filter[]): User[] {} // find all users (using parameters/filters or without them)
-  findUnique(filters: Filter[]): User {} // find unique user (using parameters/filters)
-  search(query: string): User[] {} // find unique user (using parameters/filters)
-  create(dto: UserCreateDto): User {} // create user
-  get(id: string): User {} // get user by ID or GUID
-  update(id: string, dto: UserUpdateDto): User {} // update user
-  delete(id: string): boolean {} // delete user
+// ✅ OK in DTOs only (max 1-2 levels)
+interface UserProfileResponseDto {
+  user: { id: number; name: string };
+  profile: { age: number; bio: string };
 }
 ```
 
-In case when we use a special word "find", we understand that we want to find something, but we don't know the result. If we don't get it, we should expect an empty array `[]` for "findAll" and `null` - for "find" methods.
+---
 
-In case when we use a special word "get", we understand that we want to get existing object with unique identifier. If we don't get it, we should expect an error.
+## Technology Stack
 
-Methods `create`, `get`, `update` and `delete` are typical methods for CRUD operations. Every time when we use these methods, we always use ID of existing object (except `create`), so we don't need to duplicate "ByID" in these methods.
+- **TypeScript** — Type safety and clarity
+- **Vite** — Fast build and dev server
+- **Vitest** — Fast unit testing
+- **ESLint + Prettier** — Code quality and formatting
+- **Vanilla HTML/CSS/JS** — No framework lock-in
 
-Если класс является утилитарным, то лучше конкретизировать методы, так как они могут быть самые разнообразные.
+---
 
-```ts
-class UserUtility {
-  findAllFriends() {}
-}
+## How to Run Examples
+
+### Development
+
+```bash
+npm install
+npm run dev
+npm run test              # Run tests in watch mode
+npm run test:coverage     # Run tests with coverage
 ```
 
-### Nested methods
+### Production Build
 
-Don't create nested methods with one nested method inside - it's overcomplicated for understanding.
-
-```ts
-function getUsers() {
-  return UserService.getAll();
-}
+```bash
+npm run build             # Compile and bundle
+npm run preview           # Preview production build
 ```
 
-Unfortunately, sometimes we need to use nested methods in cases when nested method is private.
+### Code Quality
 
-```ts
-class SomeComponent {
-  construction(private userService: UserService) {}
-
-  public getUsers() {
-    return this.userService.getAll();
-  }
-}
+```bash
+npm run type-check        # Check TypeScript types
+npm run lint              # Check linting
+npm run lint:fix          # Fix linting issues
 ```
+
+---
+
+## Related Documentation
+
+**Learn the theory:**
+- [know-your-entity](https://github.com/Tertium/know-your-entity) — Complete documentation
+- [Naming Conventions](https://github.com/Tertium/know-your-entity/blob/main/docs/02-naming-conventions/)
+- [Architecture Guide](https://github.com/Tertium/know-your-entity/blob/main/docs/06-architecture/)
+
+---
+
+## License
+
+Internal use only — Tertium Development Team
+
+**Last Updated**: 2026-06-29
