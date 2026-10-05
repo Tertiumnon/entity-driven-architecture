@@ -91,7 +91,7 @@ HTML, CSS, JavaScript, and component conventions.
 
 Project structure, folder organization, and no-nesting rules.
 
-- **[Folder Structure](docs/06-architecture/folder-structure.md)** — 4-level structure: core, entities, components/libs, pages/routes
+- **[Folder Structure](docs/06-architecture/folder-structure.md)** — Core areas, shallow directory nesting, flattened page hierarchies, and task-based script folders
 - **[Module Organization](docs/06-architecture/module-organization.md)** — Entity folders with consistent file naming patterns
 - **[No Nesting Rule](docs/06-architecture/no-nesting-rule.md)** — Maximum 3 levels explanation and enforcement
 - **[Component Collocation](docs/06-architecture/component-collocation.md)** — Keeping related files together
@@ -163,8 +163,9 @@ Quick lookups, checklists, and glossary.
 
 ### Architecture
 
-- **4-level structure**: `core/` → `entities/` → `components/` → `pages/`
-- **Max 3 folder levels**: Prevents deep nesting and cognitive overload
+- **Core areas**: `core/` for setup and stable shared contracts, `entities/`, `components/`, `libs/` for third-party integrations and shared libraries, and `pages/` or `routes/`
+- **Shallow directory nesting**: Keep paths to 3 folder levels where practical; flatten deeper page hierarchies with `--`-separated peer folders
+- **Task-based scripts**: Group a script and its optional companions in `scripts/{entity}--{action}/`
 - **Collocation**: Tests, mocks, constants live with their code
 - **Clear boundaries**: Each level has specific responsibilities
 

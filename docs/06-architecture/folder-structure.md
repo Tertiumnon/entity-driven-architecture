@@ -6,7 +6,7 @@ A consistent, scalable folder structure that organizes code by responsibility an
 
 ```
 src/
-├── core/                    ← Framework setup, configuration, shared utilities
+├── core/                    ← App setup, stable contracts, configuration, shared utilities
 ├── entities/                ← Domain entities, models, business logic
 ├── components/ (or libs/)   ← Reusable components, services, middleware
 └── pages/ (or routes/)      ← Application pages, routes, views
@@ -16,7 +16,7 @@ Each folder has a specific responsibility:
 
 | Folder | Purpose | Contains |
 |--------|---------|----------|
-| **core/** | Bootstrapping & shared | App initialization, config, shared utils |
+| **core/** | Foundation & shared contracts | App initialization, config, stable types/interfaces, shared utils |
 | **entities/** | Domain models | Data entities, business logic, repositories |
 | **components/** (or **libs/**) | Reusable pieces | UI components, services, utilities |
 | **pages/** (or **routes/**) | Application structure | Pages, routes, views |
@@ -34,8 +34,10 @@ Each folder has a specific responsibility:
 - Global configuration
 - Environment variables and settings
 - Shared utilities (not entity-specific)
-- Global types and interfaces
+- Stable, high-level types and interfaces used across layers (contracts)
 - Middleware and interceptors (not entity-specific)
+
+Use contracts in `core/` when multiple layers need to agree on an abstraction. Higher-level code can depend on the contract, while an implementation in `libs/` depends on that same contract. This keeps both sides from importing each other and creating a circular dependency. Keep contracts small and independent of implementation details; don't turn `core/` into a home for entity-specific types.
 
 **Examples**:
 
@@ -60,6 +62,8 @@ src/core/
 │   ├── pagination.types.ts
 │   ├── sorting.types.ts
 │   └── common.types.ts
+├── contracts/
+│   └── payment-gateway.ts     ← Stable interface used by business logic and an adapter
 └── constants/
     ├── http-codes.ts
     └── app-constants.ts
@@ -67,10 +71,62 @@ src/core/
 
 **Key Rules**:
 - ✅ Shared across multiple entities
+- ✅ Put stable cross-layer contracts here when they prevent layers from importing implementations or each other
 - ✅ No entity-specific logic
 - ✅ Configuration and setup code
 - ❌ Don't add entity-specific files here
 - ❌ Don't create "utils" that only one entity uses
+
+### Shared across the project: `core/` or `components/`?
+
+Project-wide use alone doesn't decide the folder. Put shared definitions and behavior in `core/`; put reusable visual UI in `components/`.
+
+For example, localization dictionaries and locale configuration belong in `core/`. A language switcher belongs in `components/` because it displays controls and handles user interaction. The component can use the localization definitions from `core/`:
+
+```
+src/
+├── core/
+│   └── localization/
+│       ├── localization.config.ts
+│       └── translations/
+│           ├── en.ts
+│           └── sr.ts
+└── components/
+    └── language-switcher/
+        ├── language-switcher.tsx
+        └── language-switcher.module.css
+```
+
+The dependency points from `components/` to `core/`: shared UI may consume foundational definitions, while `core/` should not depend on a particular UI component.
+
+**Example: depend on a contract, not an integration**
+
+```typescript
+// core/contracts/payment-gateway.ts
+export interface PaymentGateway {
+  charge(orderId: string, amount: number): Promise<void>;
+}
+
+// entities/order/order.logic.ts
+import type { PaymentGateway } from '../../core/contracts/payment-gateway';
+
+export function createOrderLogic(paymentGateway: PaymentGateway) {
+  return async (orderId: string, amount: number) => {
+    await paymentGateway.charge(orderId, amount);
+  };
+}
+
+// libs/stripe/stripe-payment-gateway.ts
+import type { PaymentGateway } from '../../core/contracts/payment-gateway';
+
+export class StripePaymentGateway implements PaymentGateway {
+  async charge(orderId: string, amount: number): Promise<void> {
+    // Call Stripe SDK here.
+  }
+}
+```
+
+The application bootstrap creates `StripePaymentGateway` and passes it to `createOrderLogic`. Both modules depend on the contract in `core/`; `entities/` does not import `libs/`, and `libs/` does not import `entities/`. For a contract used by only one domain, keep it with that domain instead of promoting it to `core/`.
 
 ---
 
@@ -148,10 +204,9 @@ src/entities/
 - Frontend-specific modules
 
 **Use `libs/`** for:
-- Business services (not entity-specific)
-- Utility libraries
-- Cross-cutting concerns
-- Backend-focused organization
+- Integrations with third-party services and SDKs
+- A small client or adapter around an external API, including when no SDK exists
+- Shared application libraries and cross-cutting services that are not owned by one entity
 
 **Examples with `components/`**:
 
@@ -185,6 +240,11 @@ src/components/
 
 ```
 src/libs/
+├── youtube/                    ← YouTube integration (SDK or API wrapper)
+│   ├── youtube.client.ts       ← Calls the external service
+│   ├── youtube.types.ts        ← Integration-specific types, if needed
+│   └── youtube.constants.ts    ← Integration-specific constants, if needed
+│
 ├── auth-service/               ← Cross-entity auth logic
 │   ├── auth.ts
 │   ├── auth.service.ts
@@ -210,11 +270,13 @@ src/libs/
 
 **Key Rules**:
 - ✅ For `components/`: UI elements and visual components
-- ✅ For `libs/`: Business services not owned by an entity
+- ✅ For `libs/`: Third-party integrations, shared services, and reusable libraries not owned by one entity
+- ✅ Wrap an external API in a small client or adapter when no suitable SDK exists
 - ✅ Reusable across multiple features
 - ✅ Can have entity-agnostic services here
 - ❌ Don't put single-entity logic here (goes in entities/)
 - ❌ Don't duplicate entity-specific code
+- ❌ Don't copy an SDK or external API's behavior into entity domain logic; keep integration details behind the `libs/` boundary
 
 **When to use `components/` vs `libs/`**:
 - **Frontend-heavy projects** → Use `components/` for UI, `libs/` for non-UI reusables
@@ -256,6 +318,21 @@ src/pages/
     └── checkout.tsx
 ```
 
+### Keep deep page hierarchies shallow
+
+Avoid nested folders when a page has sub-pages. Encode the route hierarchy in a single peer-folder name, using `--` between route segments:
+
+```
+pages/
+├── profile/
+├── profile--settings/
+└── profile--settings--security/
+```
+
+Here, `profile--settings--security/` represents the route hierarchy `profile/settings/security`. Put that page's files directly in its folder. Do not create `pages/profile/pages/settings/` or another nested `pages/` folder.
+
+Use the same spelling and order as the route segments, and check your framework's routing rules: some frameworks derive URLs from directory names and may need explicit route configuration for this convention.
+
 **Examples with `routes/`**:
 
 ```
@@ -277,9 +354,25 @@ src/routes/
 - ✅ Route directory names may be plural when they match plural API resources, such as `articles/`
 - ✅ Each page/route maps to a URL path
 - ❌ Don't put business logic in pages (import from entities/)
-- ❌ Don't use nested page folders beyond one level
+- ✅ For deep page hierarchies, use peer folders with `--`-separated route segments instead of nested directories
 
 **See Also**: [Module Organization](module-organization.md#exceptions-pages-and-routes)
+
+---
+
+## Scripts: One Folder per Task
+
+Put each standalone, entity-focused script in its own shallow folder. Name the folder and primary file `{entity}--{action}`; keep related documentation, constants, and other files beside it with the same base name:
+
+```
+scripts/
+└── user--update-description/
+    ├── user--update-description.ts
+    ├── user--update-description.md
+    └── user--update-description.constants.ts
+```
+
+Add companion files only when needed. Keep them in the task folder rather than creating nested `constants/`, `docs/`, or `helpers/` directories. Use a specific action in the name, and avoid this convention for general-purpose tooling that is not tied to one entity and action.
 
 ---
 
@@ -393,9 +486,9 @@ src/
 
 ---
 
-## Maximum 3 Levels Deep
+## Keep Directory Nesting Shallow
 
-This structure enforces a **maximum of 3 folder levels** to prevent cognitive overload:
+As a default, keep paths to **3 folder levels or fewer** so code is easy to explore. When a logical hierarchy is deeper, flatten it into peer folders with names that preserve the hierarchy, as shown above for pages. The goal is shallow navigation, not a strict limit on how many route segments a feature may have.
 
 ```
 ✅ GOOD — 3 levels max
@@ -410,12 +503,12 @@ src/
     user-card/       ← Level 2
       user-card.tsx  ← Level 3 (file)
 
-❌ BAD — 4+ levels (too deep)
+❌ BAD — Unnecessary nested directories
 src/
   domain/            ← Level 1
     entities/        ← Level 2
       user/          ← Level 3
-        repository/  ← Level 4 ← TOO DEEP!
+        repository/  ← Adds a level without helping navigation
           user.repo.ts
 ```
 
