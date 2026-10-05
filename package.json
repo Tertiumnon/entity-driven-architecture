@@ -1,5 +1,13 @@
 {
+  "scripts": {
+    "release:patch": "bun node_modules/@tertium/js/scripts/release/release.ts patch",
+    "release:minor": "bun node_modules/@tertium/js/scripts/release/release.ts minor",
+    "release:major": "bun node_modules/@tertium/js/scripts/release/release.ts major"
+  },
   "dependencies": {
     "markdownlint-cli2": "^0.20.0"
+  },
+  "devDependencies": {
+    "@tertium/js": "^3.2.0"
   }
 }
