@@ -4,7 +4,7 @@ Every component/entity should have its own folder with all related files using t
 
 ## The Golden Rule: Always Singular
 
-**Every folder, every file, every interface, every class name is SINGULAR — never plural.**
+Entity and component names are singular. Route directories and files follow the API resource name, which may be plural.
 
 ```
 ✅ CORRECT: Singular (standard rule)
@@ -12,11 +12,12 @@ src/user/                (not users/)
   user.ts                (not users.ts)
   user.repo.ts           (not users.repo.ts)
 
-✅ EXCEPTIONS: Plural only for these
+✅ EXCEPTIONS: Collection and resource routes
 src/pages/               ← Contains multiple pages
 src/routes/              ← Contains multiple routes
+src/routes/articles/     ← Matches the /articles resource
 
-❌ WRONG: Plural (for everything else)
+❌ WRONG: Plural entity names
 src/users/               ← Wrong! (entity should be singular)
   users.ts               ← Wrong!
   users.repo.ts          ← Wrong!
@@ -44,9 +45,12 @@ src/
       user-settings.tsx
 
   routes/                   ← Plural (contains route definitions)
-    user.routes.ts
-    product.routes.ts
-    auth.routes.ts
+    articles/
+      articles.routes.ts
+      articles.constants.ts   ← Add when needed
+      articles.utils.ts       ← Add when needed
+    auth/
+      auth.routes.ts
 ```
 
 **Why these are exceptions:**
@@ -54,7 +58,7 @@ src/
 - `routes/` is a **container for multiple route definitions** (inherently a collection)
 - The folder name describes the **collection type**, not a single entity
 
-**Everything inside these folders is still singular:**
+Page and entity names remain singular. Route directories follow their resource name, which may be plural:
 ```
 ✅ CORRECT
 pages/
@@ -63,8 +67,10 @@ pages/
   user-detail.tsx        (singular)
 
 routes/
-  user.routes.ts         (singular)
-  product.routes.ts      (singular)
+  articles/
+    articles.routes.ts
+  auth/
+    auth.routes.ts
 ```
 
 ## The Pattern
@@ -393,11 +399,12 @@ import { Pagination } from '../../shared/types/pagination.types';
 
 ## Naming Consistency Rules
 
-### ⭐ Rule 0: ALWAYS SINGULAR (with 2 exceptions)
+### ⭐ Rule 0: Singular entities, resource-named routes
 
-This is the fundamental rule. Everything is singular: folders, files, class names, interface names.
+Entity folders, files, classes, and interfaces use singular names.
 
 **Exceptions:** `pages/` and `routes/` are plural because they contain collections.
+Directories inside `routes/` follow the resource name, so a plural API resource uses a plural directory such as `routes/articles/`.
 
 ```
 ✅ SINGULAR (Standard rule)
@@ -414,11 +421,12 @@ class User { }
 class UserRepository { }
 interface CreateUserDto { }
 
-✅ PLURAL (Only exceptions)
+✅ PLURAL (Collection folders and resource routes)
 src/pages/              ← Contains multiple pages
 src/routes/             ← Contains multiple routes
+src/routes/articles/    ← Matches the /articles resource
 
-❌ PLURAL (Always wrong — for everything else)
+❌ PLURAL (Wrong for entity names)
 src/users/            ← WRONG! (entity should be singular)
 src/products/         ← WRONG!
 src/orders/           ← WRONG!
@@ -431,8 +439,7 @@ class Users { }       ← WRONG!
 - Consistency across entire codebase
 - No ambiguity about naming
 - Matches DDD (Domain-Driven Design) conventions
-- Easier to remember ("always singular, except pages/ and routes/")
-- Only 2 clear exceptions that describe container collections
+- Easy to apply: singular domain entities and route names matching their API resources
 
 ### Rule 1: Base name matches the entity
 
@@ -545,7 +552,7 @@ When creating a new entity/component:
 - [ ] Folder name is singular: `src/user/` (not `src/users/`)
 - [ ] File base name is singular: `user.ts` (not `users.ts`)
 - [ ] Interface/class name is singular: `User` (not `Users`)
-- [ ] ⚠️ **Exceptions**: `pages/` and `routes/` folders are plural (only these!)
+- [ ] ⚠️ **Exceptions**: `pages/`, `routes/`, and plural route resource names such as `routes/articles/`
 
 **File Organization:**
 - [ ] All files use base name: `{entity-name}.{type}.ts`
@@ -555,6 +562,7 @@ When creating a new entity/component:
 - [ ] Optional index.ts for exports (minimal, not barrel)
 - [ ] No files with generic names (utils.ts, types.ts, etc.)
 - [ ] No shared logic — moved to `/shared/` if truly common
+- [ ] Each route has its own directory and matching file prefixes, even when it has only one file
 
 ---
 

@@ -260,28 +260,21 @@ src/pages/
 
 ```
 src/routes/
-├── user.routes.ts             ← User routes
-│   ├── GET /users
-│   ├── GET /users/:id
-│   ├── POST /users
-│   ├── PUT /users/:id
-│   └── DELETE /users/:id
-│
-├── product.routes.ts          ← Product routes
-│   ├── GET /products
-│   ├── GET /products/:id
-│   ├── POST /products
-│   └── ...
-│
-├── order.routes.ts            ← Order routes
-├── auth.routes.ts             ← Auth routes
-└── index.ts                   ← Combine all routes
+├── articles/
+│   ├── articles.routes.ts
+│   ├── articles.constants.ts  ← Add when needed
+│   └── articles.utils.ts      ← Add when needed
+├── users/
+│   └── users.routes.ts
+└── auth/
+    └── auth.routes.ts
 ```
 
 **Key Rules**:
 - ✅ `pages/` folder is PLURAL (contains multiple pages)
 - ✅ `routes/` folder is PLURAL (contains multiple routes)
-- ✅ Files inside are still SINGULAR: `user-detail.tsx`, `user.routes.ts`
+- ✅ Give each route its own directory from the first file; name companion files with the same directory base name
+- ✅ Route directory names may be plural when they match plural API resources, such as `articles/`
 - ✅ Each page/route maps to a URL path
 - ❌ Don't put business logic in pages (import from entities/)
 - ❌ Don't use nested page folders beyond one level
@@ -624,7 +617,8 @@ When organizing your project:
 - [ ] Does each entity folder use singular naming?
 - [ ] Do all files in an entity folder start with entity name?
 - [ ] Is folder depth never more than 3 levels?
-- [ ] Are `pages/` and `routes/` the only plural folders?
+- [ ] Are entity folders singular and route directories named after their API resources?
+- [ ] Does each route have its own directory with matching file prefixes?
 - [ ] Are shared utilities in `core/`, not scattered?
 - [ ] Are reusable components in `components/`?
 - [ ] Are cross-entity services in `libs/`?
