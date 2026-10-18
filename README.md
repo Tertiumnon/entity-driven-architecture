@@ -1,4 +1,4 @@
-# Know Your Entity
+# Entity-Driven Architecture
 
 > Comprehensive guide to entity-driven development principles, naming conventions, and architectural patterns.
 
