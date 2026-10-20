@@ -1,3 +1,4 @@
-{type: style-guide,language: Markdown}
+type: style-guide
+language: Markdown
 publish_on:
   - https://tertiumnon.github.io
