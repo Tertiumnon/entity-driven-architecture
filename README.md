@@ -1,6 +1,6 @@
 # Entity-Driven Architecture
 
-> Comprehensive guide to entity-driven development principles, naming conventions, and architectural patterns.
+Guide to entity-driven development principles, naming conventions, and architectural patterns.
 
 **Purpose**: Internal standard for development teams seeking structured, maintainable code through entity-driven design.
 
@@ -27,7 +27,7 @@ This thinking naturally leads to clean, scalable, maintainable architecture.
 
 1. [What is an Entity?](docs/01-introduction/what-is-entity.md) — 5 min read
 2. [5-Minute Quick Reference](docs/01-introduction/quick-start.md) — Essential rules at a glance
-3. [See working code examples](https://github.com/Tertium/entity-driven-architecture) — Practical implementations
+3. [See working code examples](https://github.com/Tertiumnon/entity-driven-architecture--example) — Practical implementations
 
 **Need a specific answer?** Use the table of contents below.
 
@@ -130,7 +130,7 @@ Practical domain examples showing entity-driven design in action.
 - **[API Design](docs/08-real-world-examples/task-management/api-design.md)**
 - **[Frontend Structure](docs/08-real-world-examples/task-management/frontend-structure.md)**
 
-See **working implementations** in [entity-driven-architecture](https://github.com/Tertium/entity-driven-architecture).
+See **working implementations** in [entity-driven-architecture--example](https://github.com/Tertiumnon/entity-driven-architecture--example).
 
 ### [9. Reference](docs/09-reference/)
 
@@ -183,7 +183,7 @@ Quick lookups, checklists, and glossary.
 
 All theoretical concepts have **working code implementations** in:
 
-**[entity-driven-architecture](https://github.com/Tertium/entity-driven-architecture)**
+**[entity-driven-architecture--example](https://github.com/Tertiumnon/entity-driven-architecture--example)**
 
 - Basic example with User entity
 - E-commerce with User, Product, Order, Cart
@@ -235,7 +235,7 @@ This guide **does not** cover:
 - **Quick answer** (2 min): [Quick Start](docs/01-introduction/quick-start.md)
 - **Detailed answer** (15 min): Topic's main guide (e.g., [Naming Conventions](docs/02-naming-conventions/overview.md))
 - **Deep dive** (30+ min): Topic + Examples + Anti-Patterns
-- **Hands-on learning**: [Working code examples](https://github.com/Tertium/entity-driven-architecture)
+- **Hands-on learning**: [Working code examples](https://github.com/Tertiumnon/entity-driven-architecture--example)
 
 ---
 
