@@ -239,12 +239,6 @@ This guide **does not** cover:
 
 ---
 
-## Contributing
-
-Found an issue? Want to add a clarification? See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
-
 ## Version History
 
 | Version | Date | Changes |
