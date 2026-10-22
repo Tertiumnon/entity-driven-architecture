@@ -1,4 +1,21 @@
 type: style-guide
+slug: entity-driven-architecture
 language: Markdown
-publish_on:
+listed_on:
   - https://tertiumnon.github.io
+display_name:
+  en: "Entity-Driven Architecture"
+summary:
+  en: "Guide to entity-driven development principles, naming conventions, and architectural patterns."
+languages:
+  - en
+default_language: en
+audience:
+  - developers
+entry_point: README.md
+team:
+  - name: Vitalii Balabanov
+    roles:
+      - owner
+      - maintainer
+    github: Tertiumnon
