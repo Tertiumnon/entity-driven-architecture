@@ -132,6 +132,24 @@ Practical domain examples showing entity-driven design in action.
 
 See **working implementations** in [entity-driven-architecture--example](https://github.com/Tertiumnon/entity-driven-architecture--example).
 
+### [Game Engines](docs/examples/game-engines/)
+
+Entity patterns for Unity (C#) and Godot: folders, naming, config data, systems and views.
+
+- **[Overview](docs/examples/game-engines/overview.md)** — Shared principles and choosing an approach
+- **[Unity](docs/examples/game-engines/unity/overview.md)** — Entities, config assets, systems, views, tests
+- **[Folders and Naming (Unity)](docs/examples/game-engines/unity/structure.md)** — Entity folders, PascalCase file names, suffixes
+- **[Unity ECS](docs/examples/game-engines/unity-ecs/overview.md)** — The Entities runtime, chosen at kickoff for thousands of simulated entities
+- **[Godot](docs/examples/game-engines/godot/overview.md)** — Scenes, resources, components, signals
+
+### [Web Engines](docs/examples/web-engines/)
+
+Entity patterns for frameworks: frontend (React, SolidJS, Angular) and backend (Express, Elysia, Hono, NestJS).
+
+- **[Overview](docs/examples/web-engines/overview.md)** — Shared layers and suffix mapping
+- **[React](docs/examples/web-engines/react/overview.md)** · **[SolidJS](docs/examples/web-engines/solidjs/overview.md)** · **[Angular](docs/examples/web-engines/angular/overview.md)**
+- **[Express](docs/examples/web-engines/express/overview.md)** · **[Elysia](docs/examples/web-engines/elysia/overview.md)** · **[Hono](docs/examples/web-engines/hono/overview.md)** · **[NestJS](docs/examples/web-engines/nestjs/overview.md)**
+
 ### [9. Reference](docs/core/09-reference/)
 
 Quick lookups, checklists, and glossary.
@@ -141,24 +159,6 @@ Quick lookups, checklists, and glossary.
 - **[Glossary](docs/core/09-reference/glossary.md)** — Term definitions
 - **[FAQ](docs/core/09-reference/faq.md)** — Common questions
 - **[External Resources](docs/core/09-reference/resources.md)** — Links to referenced tools and standards
-
-### [10. Game Engines](docs/core/10-game-engines/)
-
-Entity patterns for Unity (C#) and Godot: folders, naming, config data, systems and views.
-
-- **[Overview](docs/core/10-game-engines/overview.md)** — Shared principles and choosing an approach
-- **[Unity](docs/core/10-game-engines/unity/overview.md)** — Entities, config assets, systems, views, tests
-- **[Folders and Naming (Unity)](docs/core/10-game-engines/unity/structure.md)** — Entity folders, PascalCase file names, suffixes
-- **[Unity ECS](docs/core/10-game-engines/unity-ecs/overview.md)** — The Entities runtime, chosen at kickoff for thousands of simulated entities
-- **[Godot](docs/core/10-game-engines/godot/overview.md)** — Scenes, resources, components, signals
-
-### [11. Web Engines](docs/core/11-web-engines/)
-
-Entity patterns for frameworks: frontend (React, SolidJS, Angular) and backend (Express, Elysia, Hono, NestJS).
-
-- **[Overview](docs/core/11-web-engines/overview.md)** — Shared layers and suffix mapping
-- **[React](docs/core/11-web-engines/react/overview.md)** · **[SolidJS](docs/core/11-web-engines/solidjs/overview.md)** · **[Angular](docs/core/11-web-engines/angular/overview.md)**
-- **[Express](docs/core/11-web-engines/express/overview.md)** · **[Elysia](docs/core/11-web-engines/elysia/overview.md)** · **[Hono](docs/core/11-web-engines/hono/overview.md)** · **[NestJS](docs/core/11-web-engines/nestjs/overview.md)**
 
 ---
 
@@ -220,7 +220,7 @@ This guide covers:
 - Separation of concerns and architecture
 - Frontend component and CSS conventions
 - Backend service and API patterns
-- Game engine patterns for Unity and Godot (section 10)
+- Game engine and web engine patterns (see Examples above)
 - Real-world examples and case studies
 
 This guide **does not** cover:
@@ -238,7 +238,7 @@ This guide **does not** cover:
 
 - **Backend Developer**: Read [Backend Patterns](docs/core/04-backend-patterns/) → [Entity Structure](docs/core/03-entity-structure/)
 - **Frontend Developer**: Read [Frontend Patterns](docs/core/05-frontend-patterns/) → [Architecture](docs/core/06-architecture/)
-- **Game Developer**: Read [Game Engines](docs/core/10-game-engines/) → [Entity Structure](docs/core/03-entity-structure/)
+- **Game Developer**: Read [Game Engines](docs/examples/game-engines/) → [Entity Structure](docs/core/03-entity-structure/)
 - **Full Stack**: Start with [Introduction](docs/core/01-introduction/) → read all
 - **Team Lead**: Use checklists in [Reference](docs/core/09-reference/), share examples with team
 
@@ -263,7 +263,7 @@ This guide **does not** cover:
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 2.1 | 2026-11-12 | Added game engine patterns for Unity and Godot (section 10) |
+| 2.1 | 2026-11-12 | Added game engine and web engine patterns as examples |
 | 2.0 | 2026-06-29 | Complete restructure: reorganized into 9 sections, expanded examples, added real-world case studies, fixed JSON typos |
 | 1.0 | 2024-12-20 | Initial documentation |
 

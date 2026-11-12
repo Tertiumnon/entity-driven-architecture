@@ -1,6 +1,6 @@
 # Web Engines
 
-Same entity pattern as the [web guide](../03-entity-structure/flat-entities.md) and the [game engines](../10-game-engines/overview.md). Every framework folder has the same four files.
+Same entity pattern as the [web guide](../../core/03-entity-structure/flat-entities.md) and the [game engines](../game-engines/overview.md). Every framework folder has the same four files.
 
 | Framework | Side | Guide |
 |-----------|------|-------|
