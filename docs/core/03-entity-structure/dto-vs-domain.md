@@ -369,4 +369,4 @@ When designing entities and DTOs:
 
 - [Flat Entities](flat-entities.md)
 - [Relationships & References](relationships.md)
-- [Examples](examples.md)
+- [Examples](../../examples/entity-structure.md)

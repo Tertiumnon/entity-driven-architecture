@@ -404,4 +404,4 @@ When designing a domain entity:
 - [DTO vs Domain Model](dto-vs-domain.md)
 - [Relationships & References](relationships.md)
 - [Denormalization](denormalization.md)
-- [Examples](examples.md)
+- [Examples](../../examples/entity-structure.md)

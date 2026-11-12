@@ -472,7 +472,7 @@ interface UserProfileDto {
 
 ## Related
 
-- [Flat Entities](flat-entities.md)
-- [DTO vs Domain Model](dto-vs-domain.md)
-- [Relationships & References](relationships.md)
-- [Denormalization](denormalization.md)
+- [Flat Entities](../core/03-entity-structure/flat-entities.md)
+- [DTO vs Domain Model](../core/03-entity-structure/dto-vs-domain.md)
+- [Relationships & References](../core/03-entity-structure/relationships.md)
+- [Denormalization](../core/03-entity-structure/denormalization.md)

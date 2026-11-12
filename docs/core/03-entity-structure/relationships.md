@@ -419,4 +419,4 @@ When designing relationships:
 - [Flat Entities](flat-entities.md)
 - [DTO vs Domain Model](dto-vs-domain.md)
 - [Denormalization](denormalization.md)
-- [Examples](examples.md)
+- [Examples](../../examples/entity-structure.md)

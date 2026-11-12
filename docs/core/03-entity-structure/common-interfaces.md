@@ -612,4 +612,4 @@ When creating a new entity:
 - [Flat Entities](flat-entities.md)
 - [DTO vs Domain Model](dto-vs-domain.md)
 - [Relationships & References](relationships.md)
-- [Examples](examples.md)
+- [Examples](../../examples/entity-structure.md)
